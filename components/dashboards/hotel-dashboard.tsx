@@ -201,7 +201,7 @@ export function HotelDashboard({ hotelId, onBackToHotels }: HotelDashboardProps)
     const start = new Date(isoLike)
     if (isNaN(start.getTime())) return false
 
-    const diffSeconds = (Date.now() - start.getTime()) / 1000
+    const diffSeconds = (now - start.getTime()) / 1000
     return diffSeconds > getCleaningThresholdSeconds()
   }
 
