@@ -52,7 +52,7 @@ interface RoomManagementProps {
  * from the backend and offers filters, sorting, and a details drawer.
  */
 export function RoomManagement({ hotelId, settings, updateSettings }: RoomManagementProps) {
-  const { rooms, loading, error, powerReadings } = useHotelData(hotelId)
+  const { rooms, loading, error, powerReadings, activities } = useHotelData(hotelId)
   const [searchTerm, setSearchTerm] = useState("")
   const [floorFilter, setFloorFilter] = useState("all")
   const [typeFilter, setTypeFilter] = useState("all")
@@ -65,9 +65,24 @@ export function RoomManagement({ hotelId, settings, updateSettings }: RoomManage
   // Transform live room data to match the expected format
   const transformedRooms = useMemo(() => {
     if (!rooms) return []
+
+    // Build a lookup of latest activity text per room number
+    const latestActivityByRoom = new Map<string, string>()
+
+    if (activities && activities.length > 0) {
+      for (const activity of activities) {
+        const match = activity.action.match(/Room\s+(\d+)/)
+        if (!match) continue
+        const roomNum = match[1]
+        if (!latestActivityByRoom.has(roomNum)) {
+          latestActivityByRoom.set(roomNum, activity.action)
+        }
+      }
+    }
     
     return rooms.map(room => {
       const status = room.status || "vacant"
+      const lastActivity = latestActivityByRoom.get(room.number) || "N/A"
       return {
         id: room.id.toString(),
         number: room.number,
@@ -79,11 +94,11 @@ export function RoomManagement({ hotelId, settings, updateSettings }: RoomManage
           type: room.occupantType,
           avatar: "/placeholder.svg?height=40&width=40"
         } : undefined,
-        lastActivity: "N/A",
+        lastActivity,
         status,
       }
     })
-  }, [rooms])
+  }, [rooms, activities])
 
   /** Apply text filters, floor/type filters, and sorting to rooms. */
   const filteredAndSortedRooms = useMemo(() => {
