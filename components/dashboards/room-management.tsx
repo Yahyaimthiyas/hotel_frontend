@@ -17,6 +17,7 @@ import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { RoomCard } from "@/components/ui/room-card"
 import { useHotelData } from "@/hooks/useHotelData"
+import type { Settings as HotelSettings } from "@/lib/api"
 
 import { 
   Building2, 
@@ -42,14 +43,16 @@ import {
  */
 interface RoomManagementProps {
   hotelId: string
+  settings: HotelSettings | null
+  updateSettings: (data: Partial<HotelSettings>) => Promise<void>
 }
 
 /**
  * Room-level management view for a hotel. Uses live room and power data
  * from the backend and offers filters, sorting, and a details drawer.
  */
-export function RoomManagement({ hotelId }: RoomManagementProps) {
-  const { rooms, loading, error, powerReadings, settings, updateSettings } = useHotelData(hotelId)
+export function RoomManagement({ hotelId, settings, updateSettings }: RoomManagementProps) {
+  const { rooms, loading, error, powerReadings } = useHotelData(hotelId)
   const [searchTerm, setSearchTerm] = useState("")
   const [floorFilter, setFloorFilter] = useState("all")
   const [typeFilter, setTypeFilter] = useState("all")
