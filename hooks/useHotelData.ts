@@ -111,14 +111,22 @@ export function useHotelData(hotelId: string) {
       setActivities(prevActivities => [data, ...prevActivities]);
     };
 
+    // When the real-time channel (WebSocket/SSE) connects or reconnects,
+    // refetch all hotel data to catch up on any missed events.
+    const handleConnected = () => {
+      fetchHotelData();
+    };
+
     socketService.onRoomUpdate(hotelId, handleRoomUpdate);
     socketService.onActivityUpdate(hotelId, handleActivityUpdate);
+    socketService.on('connected', handleConnected);
 
     return () => {
       socketService.offRoomUpdate(hotelId, handleRoomUpdate);
       socketService.offActivityUpdate(hotelId, handleActivityUpdate);
+      socketService.off('connected', handleConnected);
     };
-  }, [hotelId]);
+  }, [hotelId, fetchHotelData]);
 
   /**
    * Update the current hotel's metadata and keep local state in sync.
