@@ -30,13 +30,13 @@
 
 # 🏨 RFID Hotel Management System
 
-[![Deploy Status](https://img.shields.io/badge/Deploy-Production%20Ready-brightgreen)](https://hotel-management-demo.vercel.app)
-[![Backend](https://img.shields.io/badge/Backend-Online-success)](https://hotel-management-api.onrender.com)
+[![Deploy Status](https://img.shields.io/badge/Deploy-Production%20Ready-brightgreen)](https://hotel-frontend-two-puce.vercel.app)
+[![Backend](https://img.shields.io/badge/Backend-Online-success)](https://hotel-backend-5kcn.onrender.com)
 [![Database](https://img.shields.io/badge/Database-MongoDB%20Atlas-green)](https://cloud.mongodb.com)
 [![Hardware](https://img.shields.io/badge/Hardware-ESP32%20Ready-blue)](#esp32-setup)
 
-> **🚀 Live Demo**: [https://hotel-management-demo.vercel.app](https://hotel-management-demo.vercel.app)  
-> **📡 Backend API**: [https://hotel-management-api.onrender.com](https://hotel-management-api.onrender.com)
+> **🚀 Live Demo**: [https://hotel-frontend-two-puce.vercel.app](https://hotel-frontend-two-puce.vercel.app)  
+> **📡 Backend API**: [https://hotel-backend-5kcn.onrender.com](https://hotel-backend-5kcn.onrender.com)
 
 ## 📋 Table of Contents
 
@@ -212,8 +212,8 @@ npm install
 ### **3. Environment Setup**
 ```bash
 # Frontend (.env.local)
-NEXT_PUBLIC_API_URL=https://coastal-grand-back.onrender.com
-NEXT_PUBLIC_SOCKET_URL=https://coastal-grand-back.onrender.com
+NEXT_PUBLIC_API_URL=https://hotel-backend-5kcn.onrender.com
+NEXT_PUBLIC_SOCKET_URL=https://hotel-backend-5kcn.onrender.com
 
 # Backend (.env)
 MONGO_URL=your-mongodb-connection-string
@@ -313,8 +313,8 @@ vercel --prod
 
 **Frontend (Vercel)**:
 ```env
-NEXT_PUBLIC_API_URL=https://coastal-grand-back.onrender.com
-NEXT_PUBLIC_SOCKET_URL=https://coastal-grand-back.onrender.com
+NEXT_PUBLIC_API_URL=https://hotel-backend-5kcn.onrender.com
+NEXT_PUBLIC_SOCKET_URL=https://hotel-backend-5kcn.onrender.com
 NEXTAUTH_SECRET=your-secret-key
 ```
 
@@ -323,7 +323,7 @@ NEXTAUTH_SECRET=your-secret-key
 MONGO_URL=mongodb+srv://user:pass@cluster.mongodb.net/hotel_db
 PORT=3000
 NODE_ENV=production
-FRONTEND_URL=https://coastal-grand-tolr.vercel.app
+FRONTEND_URL=https://hotel-frontend-two-puce.vercel.app
 ```
 
 ---
@@ -355,7 +355,7 @@ const char* ssid = "YOUR_WIFI_SSID";
 const char* password = "YOUR_WIFI_PASSWORD";
 
 // Server configuration
-const char* websocketHost = "coastal-grand-back.onrender.com";
+const char* websocketHost = "hotel-backend-5kcn.onrender.com";
 const int websocketPort = 443;
 const char* websocketPath = "/mqtt";
 
@@ -538,8 +538,8 @@ npm run test:e2e
 #### **Backend Testing**
 ```bash
 # API endpoint testing
-curl https://coastal-grand-back.onrender.com/api/hotels
-curl https://coastal-grand-back.onrender.com/health
+curl https://hotel-backend-5kcn.onrender.com/api/hotels
+curl https://hotel-backend-5kcn.onrender.com/health
 
 # WebSocket testing
 node test-websocket.js
@@ -565,7 +565,7 @@ node test-mongodb.js
 
 ### **Base URL**
 ```
-Production: https://coastal-grand-back.onrender.com
+Production: https://hotel-backend-5kcn.onrender.com
 Development: http://localhost:3000
 ```
 
@@ -604,7 +604,7 @@ PUT /api/rooms/:hotelId/:roomId
 ### **Real-time**
 ```javascript
 // WebSocket connection
-const ws = new WebSocket('wss://coastal-grand-back.onrender.com/ws');
+const ws = new WebSocket('wss://hotel-backend-5kcn.onrender.com/ws');
 
 // Server-Sent Events
 const eventSource = new EventSource('/api/events/:hotelId');
@@ -637,7 +637,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ---
 
-
 ## 🏆 Acknowledgments
 
 - **shadcn/ui** for the beautiful component library
@@ -658,8 +657,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## 🔗 Quick Links
 
-- 🌐 **Live Demo**: [https://coastal-grand-tolr.vercel.app](https://coastal-grand-tolr.vercel.app)
-- 📡 **Backend API**: [https://coastal-grand-back.onrender.com](https://coastal-grand-back.onrender.com)
-- 📊 **System Status**: [Status Page](https://coastal-grand-back.onrender.com/health)
-- 📚 **API Docs**: [API Documentation](https://coastal-grand-back.onrender.com/api)
+- 🌐 **Live Demo**: [https://hotel-frontend-two-puce.vercel.app](https://hotel-frontend-two-puce.vercel.app)
+- 📡 **Backend API**: [https://hotel-backend-5kcn.onrender.com](https://hotel-backend-5kcn.onrender.com)
+- 📊 **System Status**: [Status Page](https://hotel-backend-5kcn.onrender.com/health)
+- 📚 **API Docs**: [API Documentation](https://hotel-backend-5kcn.onrender.com/api)
 - 🔧 **Deployment**: [Deployment Guide](DEPLOYMENT_GUIDE.md)
