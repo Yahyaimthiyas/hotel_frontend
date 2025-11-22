@@ -114,6 +114,7 @@ export function useHotelData(hotelId: string) {
     // When the real-time channel (WebSocket/SSE) connects or reconnects,
     // refetch all hotel data to catch up on any missed events.
     const handleConnected = () => {
+      console.log('[Realtime] Connected, refreshing hotel data...');
       fetchHotelData();
     };
 
