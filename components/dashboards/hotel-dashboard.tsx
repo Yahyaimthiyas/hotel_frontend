@@ -82,7 +82,7 @@ export function HotelDashboard({ hotelId, onBackToHotels }: HotelDashboardProps)
   const [now, setNow] = useState(Date.now())
   
   // Use live data from API
-  const { hotel: hotelData, rooms: roomsData, activities, loading, error, updateHotel, settings, users, cards } = useHotelData(hotelId)
+  const { hotel: hotelData, rooms: roomsData, activities, loading, error, updateHotel, settings, users, cards, updateSettings } = useHotelData(hotelId)
 
   /** Filter staff list by search term and role. */
   const filteredUsers = (users || []).filter((user) => {
@@ -192,6 +192,10 @@ export function HotelDashboard({ hotelId, onBackToHotels }: HotelDashboardProps)
   /**
    * Determine whether the given room has exceeded the configured
    * cleaning time threshold.
+   *
+   * Uses the local `now` timer state so that the dashboard
+   * automatically re-renders and updates the overdue indicator
+   * without requiring a full page refresh.
    */
   const isCleaningOverdue = (room: any) => {
     if (room.status !== "cleaning" || !room.cleaningStartTime) return false
@@ -611,7 +615,7 @@ export function HotelDashboard({ hotelId, onBackToHotels }: HotelDashboardProps)
         )
 
       case "rooms":
-        return <RoomManagement hotelId={hotelId} />
+        return <RoomManagement hotelId={hotelId} settings={settings} updateSettings={updateSettings} />
 
       case "staff":
         return (
